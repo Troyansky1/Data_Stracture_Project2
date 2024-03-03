@@ -206,7 +206,31 @@ public class BinomialHeap {
 	 * 
 	 */
 	public void decreaseKey(HeapItem item, int diff) {
-		return; // should be replaced by student code
+		if(item.key==min.item.key) {
+			item.key=item.key-diff;
+			return;
+		}
+		item.key=item.key-diff;
+		//its not the root, so we check to heapify-up
+		HeapNode node=item.node;
+		HeapNode nodeparent=item.node.parent;
+		int tmpkey;
+		String tmpInfo;
+		
+		while(nodeparent!=null && nodeparent.item.key>=node.item.key)
+		{
+			tmpkey=node.item.key;
+			tmpInfo=node.item.info;
+			node.item.key=nodeparent.item.key;
+			node.item.info=nodeparent.item.info;
+			nodeparent.item.key=tmpkey;
+			nodeparent.item.info=tmpInfo;
+			node=nodeparent;
+			nodeparent=nodeparent.parent;
+			
+		}
+		// no need to check the min, if item becomes the root min will still point at it.
+		//************** I need to check it .
 	}
 
 	/**
@@ -215,7 +239,9 @@ public class BinomialHeap {
 	 *
 	 */
 	public void delete(HeapItem item) {
-			//  decreaseKey then deleteMin 
+		int diff=item.key-min.item.key+1;  
+		decreaseKey(item,diff);       // making item the min node
+		deleteMin();                  // delete the min- which is item.
 		
 	}
 
