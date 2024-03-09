@@ -2,7 +2,7 @@ public class Tests extends TestHelper {
     public static void main(String[] args) {
         // Test0();
         Test1();
-        // Test2();
+        Test2();
         // Test3();
         // Test4();
 
@@ -15,16 +15,24 @@ public class Tests extends TestHelper {
     }
 
     public static void Test1() {
+        // shold be 9-> 1
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, false);
+        heap.printHeap();
+        // Should be 1-> 3
         BinomialHeap heap2 = new BinomialHeap();
         insertKeyArray(heap2, new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }, false);
-        BinomialHeap heap3 = new BinomialHeap();
-        insertKeyArray(heap3, new int[] { 7, 8, 4, 5, 6, 3, 2, 9, 1, 10 }, false);
+        // heap2.printHeap();
 
     }
 
     public static void Test2() {
+        // Should be 1-> 2
+        BinomialHeap heap3 = new BinomialHeap();
+        insertKeyArray(heap3, new int[] { 7, 8, 4, 5, 6, 3, 2, 9, 1, 10 }, false);
+    }
+
+    public static void Test3() {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, false);
         BinomialHeap heap2 = new BinomialHeap();
@@ -37,7 +45,7 @@ public class Tests extends TestHelper {
 
     }
 
-    public static void Test3() {
+    public static void Test4() {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 13, 43, 23, 33, 63, 53, 73 }, false);
         System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
@@ -48,7 +56,7 @@ public class Tests extends TestHelper {
         heap.printHeap();
     }
 
-    public static void Test4() {
+    public static void Test5() {
         BinomialHeap heap = new BinomialHeap();
         BinomialHeap heap2 = new BinomialHeap();
         // insertKeyArray(heap, new int[] {13, 43, 23, 33, 63, 53, 73});

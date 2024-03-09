@@ -59,7 +59,6 @@ public class BinomialHeap {
 	 */
 	public BinomialHeap.HeapNode link(HeapNode x, HeapNode y) {
 		if (x.item.key <= y.item.key) {
-			y.next = x.next;
 			if (x.child == null) {
 				y.next = y;
 			} else {
@@ -224,7 +223,9 @@ public class BinomialHeap {
 
 	private HeapNode getNext(HeapNode node) {
 		HeapNode nextNode = new HeapNode(null, null, null, null, 0);
-		if (node != node.next && node.next != null) {
+		int this_rank = node.rank;
+		int next_rank = node.next.rank;
+		if (node.next != null && next_rank > this_rank) {
 			nextNode = node.next;
 		}
 		return nextNode;
