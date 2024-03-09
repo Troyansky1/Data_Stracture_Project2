@@ -70,9 +70,6 @@ public class BinomialHeap {
 			x.rank *= 2;
 			return x;
 		} else {
-			if (x.next == x) {
-				y.next = y;
-			}
 			if (y.child == null) {
 				x.next = x;
 			} else {
@@ -225,6 +222,14 @@ public class BinomialHeap {
 
 	}
 
+	private HeapNode getNext(HeapNode node) {
+		HeapNode nextNode = new HeapNode(null, null, null, null, 0);
+		if (node != node.next && node.next != null) {
+			nextNode = node.next;
+		}
+		return nextNode;
+	}
+
 	/**
 	 * 
 	 * Meld the heap with heap2
@@ -233,58 +238,97 @@ public class BinomialHeap {
 	public void meld(BinomialHeap heap2) {
 		num_trees = this.num_trees + heap2.num_trees;
 		// System.out.println("In meld");
-		int rank = this.last.rank;
-		HeapNode heap1_prev_node = this.last;
+		HeapNode prev_node = this.last;
+		HeapNode nextNode = this.last.next;
 		HeapNode heap1_node = this.last.next;
 		HeapNode heap2_node = heap2.last.next;
-		// heap2 is no linger cyclic, so we can check easily where it ends.
-		heap2.last.next = null;
-		while (heap2_node != null) {
-			if (heap2_node.item.key < this.min.item.key) {
-				this.min = heap2_node;
-			}
+		HeapNode res = new HeapNode(null, null, null, null, 0);
+		HeapNode first = new HeapNode(null, null, null, null, 0);
+		HeapNode thisNode = new HeapNode(null, null, null, null, 0);
 
-			if (heap1_node.rank > heap2_node.rank) {
-				HeapNode next2 = heap2_node.next;
-				heap1_prev_node.next = heap2_node;
-				heap2_node.next = heap1_node;
-				heap1_prev_node = heap2_node;
-				heap2_node = next2;
-
-			} else if (heap1_node.rank < heap2_node.rank) {
-				heap1_prev_node = heap1_node;
-				heap1_node = heap1_node.next;
+		int max_rank = Math.max(this.last.rank, heap2.last.rank);
+		int meld_rank = 1;
+		// Iterate over the heaps to meld as long as it's not the maximum rank or when
+		// it is and there is a residue to meld.
+		while (max_rank >= meld_rank || res.rank == meld_rank) {
+			// If there are no items in this rank in both heaps.
+			if (heap1_node.rank != meld_rank && heap2_node.rank != meld_rank) {
+				// Check if there is a residue and connect it as needed.
+				if (res.rank == meld_rank) {
+					// Can't be first node in this condition.
+					thisNode = res;
+					nextNode = heap1_node;
+				}
 			}
 
 			else {
-				HeapNode prev1 = heap1_prev_node;
-				HeapNode next1 = heap1_node.next;
-				HeapNode next2 = heap2_node.next;
-				heap2_node = link(heap1_node, heap2_node);
-				prev1.next = next1;
-				heap1_node = next1;
-				if (heap2_node.rank > rank) {
-					heap1_node = heap2_node;
-					this.last = heap1_node;
-					heap2_node = null;
-				} else {
-					heap2_node.next = next2;
+				// if there is an item in heap1 but no item is Heap2
+				if (heap1_node.rank == meld_rank && heap2_node.rank != meld_rank) {
+					nextNode = getNext(heap1_node);
+					// Check if there is a residue and link with heap 1 node
+					if (res.rank == meld_rank) {
+						res = link(heap1_node, res);
+						heap1_node = nextNode;
+					}
+					// Advance the pointer in heap1
+					else {
+						thisNode = heap1_node;
+					}
 				}
-				num_trees--;
+
+				// else if there is an item in heap 2 but there is no item in heap 1
+				else if (heap1_node.rank != meld_rank && heap2_node.rank == meld_rank) {
+					// Check if there is a residue and link with heap2 node
+					if (res.rank == meld_rank) {
+						res = link(res, heap2_node);
+					}
+					// Advance the pointer in heap2
+					else {
+						thisNode = heap2_node;
+						heap2_node = getNext(heap2_node);
+					}
+				}
+
+				// else if there are items in both heaps
+				else if (heap1_node.rank == meld_rank && heap2_node.rank == meld_rank) {
+					nextNode = getNext(heap1_node);
+					HeapNode next2 = getNext(heap2_node);
+					if (res.rank == meld_rank) {
+						thisNode = res;
+						res = link(heap1_node, heap2_node);
+						heap2_node = next2;
+					} else {
+						res = link(heap1_node, heap2_node);
+						heap2_node = next2;
+						heap1_node = nextNode;
+					}
+
+				}
 
 			}
+			// If there is a node in this rank of the tree, connect it to the previos node
+			// and the next node.
+			if (thisNode.rank == meld_rank) {
+				// If this is the first, save the pointer.
+				if (first.rank == 0) {
+					first = thisNode;
+				}
+				// Check if minimal node, update if it is.
+				if (min.item.key > thisNode.item.key) {
+					min = thisNode;
+				}
+				// Update last
+				last = thisNode;
 
-			/*
-			 * System.out.println(" before if ////// min is= " + min.item.key +
-			 * "  heanode= "+heap2_node.item.key);
-			 * if (heap2_node.item.key < this.min.item.key) {
-			 * System.out.println(" in the if ,,, min is= " + min.item.key);
-			 * this.min = heap1_node;
-			 * System.out.println(" still in the if ,,, new min is= " + min.item.key);
-			 * }
-			 */
+				thisNode.next = nextNode;
+				prev_node.next = thisNode;
+				// Advance the prev and next nodes in the current heap.
+				prev_node = thisNode;
+				heap1_node = nextNode;
+			}
+			meld_rank = meld_rank * 2;
 		}
-
+		last.next = first;
 		return;
 	}
 

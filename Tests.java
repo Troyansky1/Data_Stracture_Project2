@@ -1,6 +1,6 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-
+        // Test0();
         Test1();
         // Test2();
         // Test3();
@@ -8,9 +8,15 @@ public class Tests extends TestHelper {
 
     }
 
+    public static void Test0() {
+        BinomialHeap heap = new BinomialHeap();
+        insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6 }, false);
+        insertKeyArray(heap, new int[] { 7, 8, 9, 10 }, false);
+    }
+
     public static void Test1() {
         BinomialHeap heap = new BinomialHeap();
-        // insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, false);
+        insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, false);
         BinomialHeap heap2 = new BinomialHeap();
         insertKeyArray(heap2, new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }, false);
         BinomialHeap heap3 = new BinomialHeap();
