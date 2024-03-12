@@ -4,8 +4,8 @@ public class Tests extends TestHelper {
         // Test1();
         // Test2();
         // Test3();
-        Test3_1();
-        // Test4();
+        // Test3_1();
+        Test4();
         // Test6();
 
     }
@@ -60,7 +60,6 @@ public class Tests extends TestHelper {
         heap.meld(heap2);
         heap.printHeap();
         System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
-        System.out.println("73?" + heap.last.next.child.item.key);
         System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
 
     }
