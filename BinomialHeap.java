@@ -96,26 +96,27 @@ public class BinomialHeap {
 		}
 		return prev;
 	}
+
 	/**
 	 * 
 	 * updates the min Node and last node to be the one with the highest rank.
 	 *
 	 */
 	public void updateMin_last() {
-		HeapNode newmin=last;
-		HeapNode newlast=last;
+		HeapNode newmin = last;
+		HeapNode newlast = last;
 		HeapNode prev = last.next;
 		while (prev.item.key != last.item.key) {
-			if(prev.rank>newlast.rank)
-				newlast=prev;
-			if(prev.item.key<newmin.item.key)
-				newmin=prev;
-			prev = prev.next;			
+			if (prev.rank > newlast.rank)
+				newlast = prev;
+			if (prev.item.key < newmin.item.key)
+				newmin = prev;
+			prev = prev.next;
 		}
-		this.min=newmin;
-		this.last=newlast;
+		this.min = newmin;
+		this.last = newlast;
 	}
-	
+
 	/**
 	 * 
 	 * calculates the size of node2.
@@ -123,16 +124,14 @@ public class BinomialHeap {
 	 */
 	public int calcSize(HeapNode node2) {
 		HeapNode prev = node2.next;
-		int size=(int) Math.pow(2, node2.rank);
+		int size = (int) Math.pow(2, node2.rank);
 		while (prev.item.key != node2.item.key) {
-			size+=(int) Math.pow(2, prev.rank);
+			size += (int) Math.pow(2, prev.rank);
 			prev = prev.next;
-			
+
 		}
 		return size;
 	}
-	
-
 
 	/**
 	 * 
@@ -144,52 +143,48 @@ public class BinomialHeap {
 		size -= 1;
 		HeapNode minChild = this.min.child;
 		HeapNode minNext = this.min.next;
-		if(minNext.item.key==min.item.key)
-		{
-			
+		if (minNext.item.key == min.item.key) {
+
 		}
-		
+
 		HeapNode minprev = findPrev(min);
 
 		minprev.next = minNext;
 		minChild.parent = null;
 
-		//int treenum = (int) (Math.log(minChild.rank) / Math.log(2)); // tree num is log2(rank)
-		int treenum = minChild.rank;		
+		// int treenum = (int) (Math.log(minChild.rank) / Math.log(2)); // tree num is
+		// log2(rank)
+		int treenum = minChild.rank;
 		int childrensize = calcSize(minChild);
-		
-		
-		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
-		if(min.item.key==last.item.key)
-		{ //check again
-			last=last.next;
-		}
-		
-		heap2.updateMin_last();
-		
-		if(min.next==min) 
-		{
-			//means that the min doesnt have next.So we just update the min and last in the children
-			this.size=heap2.size;
-			this.num_trees=heap2.num_trees;
-			this.last=heap2.last;
-			this.min=heap2.min;
 
-			
+		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
+		if (min.item.key == last.item.key) { // check again
+			last = last.next;
 		}
-		else {
+
+		heap2.updateMin_last();
+
+		if (min.next == min) {
+			// means that the min doesnt have next.So we just update the min and last in the
+			// children
+			this.size = heap2.size;
+			this.num_trees = heap2.num_trees;
+			this.last = heap2.last;
+			this.min = heap2.min;
+
+		} else {
 			updateMin_last();
 			this.last.parent = null;
 			heap2.last.parent = null;
 			meld(heap2);
 		}
-		
+
 		System.out.println("*******HEAP2******");
 		heap2.printHeap();
 		System.out.println("*******THIS******");
 		this.printHeap();
-		//this.last.parent = null;
-		//heap2.last.parent = null;
+		// this.last.parent = null;
+		// heap2.last.parent = null;
 
 	}
 
@@ -292,7 +287,7 @@ public class BinomialHeap {
 	}
 
 	private HeapNode getNext(HeapNode node) {
-		HeapNode nextNode = new HeapNode(null, null, null, null, 0);
+		HeapNode nextNode = new HeapNode(null, null, null, null, -1);
 		int this_rank = node.rank;
 		int next_rank = node.next.rank;
 		if (node.next != null && next_rank > this_rank) {
@@ -313,9 +308,9 @@ public class BinomialHeap {
 		HeapNode nextNode = this.last.next;
 		HeapNode heap1_node = this.last.next;
 		HeapNode heap2_node = heap2.last.next;
-		HeapNode res = new HeapNode(null, null, null, null, 0);
-		HeapNode first = new HeapNode(null, null, null, null, 0);
-		HeapNode thisNode = new HeapNode(null, null, null, null, 0);
+		HeapNode res = new HeapNode(null, null, null, null, -1);
+		HeapNode first = new HeapNode(null, null, null, null, -1);
+		HeapNode thisNode = new HeapNode(null, null, null, null, -1);
 		// System.out.println("heap1_node= " + heap1_node.item.key + " rank is= " +
 		// heap1_node.rank);
 		// System.out.println("heap2_node= " + heap2_node.item.key + " rank is= " +
@@ -324,7 +319,7 @@ public class BinomialHeap {
 		// System.out.println("**");
 
 		int max_rank = Math.max(this.last.rank, heap2.last.rank);
-		int meld_rank = 1;
+		int meld_rank = 0;
 		// Iterate over the heaps to meld as long as it's not the maximum rank or when
 		// it is and there is a residue to meld.
 		while (max_rank >= meld_rank || res.rank == meld_rank) {
@@ -387,7 +382,7 @@ public class BinomialHeap {
 			// and the next node.
 			if (thisNode.rank == meld_rank) {
 				// If this is the first, save the pointer.
-				if (first.rank == 0) {
+				if (first.rank == -1) {
 					first = thisNode;
 				}
 				// Check if minimal node, update if it is.
@@ -405,7 +400,7 @@ public class BinomialHeap {
 				prev_node = thisNode;
 				heap1_node = nextNode;
 			}
-			meld_rank ++;
+			meld_rank++;
 		}
 		last.next = first;
 		return;
@@ -475,7 +470,7 @@ public class BinomialHeap {
 		public HeapItem(int key, String info) {
 			this.info = info;
 			this.key = key;
-			node = new HeapNode(this, null, null, null, 1);
+			node = new HeapNode(this, null, null, null, 0);
 			node.next = node;
 		}
 

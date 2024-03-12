@@ -1,11 +1,11 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-        // Test0();
-        // Test1();
-        // Test2();
-        // Test3();
+        Test0();
+        Test1();
+        Test2();
+        Test3();
         // Test3_1();
-        Test4();
+        // Test4();
         // Test6();
 
     }
@@ -63,7 +63,7 @@ public class Tests extends TestHelper {
         System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
 
     }
-    
+
     // checking delete min
     public static void Test4() {
         BinomialHeap heap = new BinomialHeap();
