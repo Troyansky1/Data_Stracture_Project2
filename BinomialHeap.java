@@ -123,10 +123,10 @@ public class BinomialHeap {
 
 		System.out.println("*******HEAP2******");
 		heap2.printHeap();
-		System.out.print l n("*******THIS******");
-		this.printHeap();  
-		this.last.parent=null;
-		heap2.last.parent=null;
+		System.out.println("*******THIS******");
+		this.printHeap();
+		this.last.parent = null;
+		heap2.last.parent = null;
 		meld(heap2);
 
 	}
@@ -193,10 +193,10 @@ public class BinomialHeap {
 		item2.key = item2.key - diff;
 		// its not the root, so we check to heapify-up
 		HeapNode node = item2.node;
-		HeapNode nodeparent = item2.node. p arent;
-  
-		System.out.println("item2.node= "+item2.node.item.key);
-		System.out.println("nodeparent isss= "+nodeparent.item.key);
+		HeapNode nodeparent = item2.node.parent;
+
+		System.out.println("item2.node= " + item2.node.item.key);
+		System.out.println("nodeparent isss= " + nodeparent.item.key);
 		int tmpkey;
 		String tmpInfo;
 
@@ -252,12 +252,14 @@ public class BinomialHeap {
 		HeapNode heap1_node = this.last.next;
 		HeapNode heap2_node = heap2.last.next;
 		HeapNode res = new HeapNode(null, null, null, null, 0);
-		HeapNode first = new HeapNode(nul l, null, null, null, 0) ;  
-		HeapNode thisNode = new HeapNode( null, null, null, null,  0);  
-		System.out.println("heap1_node= "+ heap1_node.item.key +"rank is= "+heap1_node.rank);
-		System.out.println("heap2_node= "+ heap2_node.item.key +"rank is= "+heap2_node.rank);
+		HeapNode first = new HeapNode(null, null, null, null, 0);
+		HeapNode thisNode = new HeapNode(null, null, null, null, 0);
+		// System.out.println("heap1_node= " + heap1_node.item.key + " rank is= " +
+		// heap1_node.rank);
+		// System.out.println("heap2_node= " + heap2_node.item.key + " rank is= " +
+		// heap2_node.rank);
 
-		System.out.println("**");
+		// System.out.println("**");
 
 		int max_rank = Math.max(this.last.rank, heap2.last.rank);
 		int meld_rank = 1;
@@ -334,7 +336,9 @@ public class BinomialHeap {
 				last = thisNode;
 
 				thisNode.next = nextNode;
-				prev_node.next = thisNode;
+				if (prev_node.rank < meld_rank){
+					prev_node.next = thisNode;
+				}				
 				// Advance the prev and next nodes in the current heap.
 				prev_node = thisNode;
 				heap1_node = nextNode;

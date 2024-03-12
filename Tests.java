@@ -1,20 +1,23 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
         // Test0();
-        //Test1();
-        //Test2();
+        // Test1();
+        // Test2();
         // Test3();
-         //Test4();
-    	Test6();
+        Test3_1();
+        // Test4();
+        // Test6();
 
     }
 
+    // Testing very baic insertion. Sanity check.
     public static void Test0() {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6 }, false);
         insertKeyArray(heap, new int[] { 7, 8, 9, 10 }, false);
     }
 
+    // Checking more basic insertions.
     public static void Test1() {
         // shold be 9-> 1
         BinomialHeap heap = new BinomialHeap();
@@ -27,12 +30,14 @@ public class Tests extends TestHelper {
 
     }
 
+    // Checking "random" order insertions to find edge cases
     public static void Test2() {
         // Should be 1-> 2
         BinomialHeap heap3 = new BinomialHeap();
         insertKeyArray(heap3, new int[] { 7, 8, 4, 5, 6, 3, 2, 9, 1, 10 }, false);
     }
 
+    // Checking basic meld
     public static void Test3() {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, false);
@@ -46,15 +51,30 @@ public class Tests extends TestHelper {
 
     }
 
+    // Checking basic meld
+    public static void Test3_1() {
+        BinomialHeap heap = new BinomialHeap();
+        insertKeyArray(heap, new int[] { 53, 63, 73 }, false);
+        BinomialHeap heap2 = new BinomialHeap();
+        insertKeyArray(heap2, new int[] { 23, 33, 43 }, false);
+        heap.meld(heap2);
+        heap.printHeap();
+        System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
+        System.out.println("73?" + heap.last.next.child.item.key);
+        System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
+
+    }
+
     public static void Test4() {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 13, 43, 23, 33, 63, 53, 73 }, false);
         Test4helper(heap);
-        
+
     }
+
     public static void Test4helper(BinomialHeap heap) {
-    	System.out.println(" <<<<<<<<<<<<now in test helper>>>>>>>>>>>>>>>>>>");
-    	System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
+        System.out.println(" <<<<<<<<<<<<now in test helper>>>>>>>>>>>>>>>>>>");
+        System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
         System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
         System.out.println("min: " + heap.findMin().key + " Rank " + heap.findMin().node.rank);
         System.out.println(" heap before delete*****************");
@@ -78,31 +98,28 @@ public class Tests extends TestHelper {
         // heap.printHeap();
 
     }
-    //testing decreaseKey
+
+    // testing decreaseKey
     public static void Test6() {
-    	 BinomialHeap heap = new BinomialHeap();
-         insertKeyArray(heap, new int[] { 13, 43, 23, 33, 63, 53, 73 }, false);
-         heap.printHeap();
-         int key=43;
+        BinomialHeap heap = new BinomialHeap();
+        insertKeyArray(heap, new int[] { 13, 43, 23, 33, 63, 53, 73 }, false);
+        heap.printHeap();
+        int key = 43;
         // BinomialHeap.HeapItem item2 =heap.findMin();
 
-         //BinomialHeap.HeapItem item3 =heap.findMin();
-         
+        // BinomialHeap.HeapItem item3 =heap.findMin();
+
         // System.out.println("min is="+item3.key);
-         
 
-         System.out.println("child.child is "+heap.min.child.child.item.key);
-         System.out.println("child.child.parent is "+heap.min.child.parent.item.key);
-         
-         heap.decreaseKey(heap.min.child.child.item, 23);
-         System.out.println("new min is="+heap.findMin().key);
-         System.out.println("*****");
-         heap.printHeap();
-         
+        System.out.println("child.child is " + heap.min.child.child.item.key);
+        System.out.println("child.child.parent is " + heap.min.child.parent.item.key);
 
+        heap.decreaseKey(heap.min.child.child.item, 23);
+        System.out.println("new min is=" + heap.findMin().key);
+        System.out.println("*****");
+        heap.printHeap();
 
     }
-
 
 }
 
