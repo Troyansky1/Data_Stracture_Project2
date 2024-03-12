@@ -66,6 +66,7 @@ public class BinomialHeap {
 				x.child.next = y;
 			}
 			x.child = y;
+			y.parent = x;
 			x.rank *= 2;
 			return x;
 		} else {
@@ -76,6 +77,7 @@ public class BinomialHeap {
 				y.child.next = x;
 			}
 			y.child = x;
+			x.parent = y;
 			y.rank *= 2;
 			return y;
 		}
@@ -121,8 +123,8 @@ public class BinomialHeap {
 
 		System.out.println("*******HEAP2******");
 		heap2.printHeap();
-		System.out.println("*******THIS******");
-		this.printHeap();
+		System.out.print l n("*******THIS******");
+		this.printHeap();  
 		this.last.parent=null;
 		heap2.last.parent=null;
 		meld(heap2);
@@ -191,8 +193,8 @@ public class BinomialHeap {
 		item2.key = item2.key - diff;
 		// its not the root, so we check to heapify-up
 		HeapNode node = item2.node;
-		HeapNode nodeparent = item2.node.parent;
-
+		HeapNode nodeparent = item2.node. p arent;
+  
 		System.out.println("item2.node= "+item2.node.item.key);
 		System.out.println("nodeparent isss= "+nodeparent.item.key);
 		int tmpkey;
@@ -250,8 +252,8 @@ public class BinomialHeap {
 		HeapNode heap1_node = this.last.next;
 		HeapNode heap2_node = heap2.last.next;
 		HeapNode res = new HeapNode(null, null, null, null, 0);
-		HeapNode first = new HeapNode(null, null, null, null, 0);
-		HeapNode thisNode = new HeapNode(null, null, null, null, 0);
+		HeapNode first = new HeapNode(nul l, null, null, null, 0) ;  
+		HeapNode thisNode = new HeapNode( null, null, null, null,  0);  
 		System.out.println("heap1_node= "+ heap1_node.item.key +"rank is= "+heap1_node.rank);
 		System.out.println("heap2_node= "+ heap2_node.item.key +"rank is= "+heap2_node.rank);
 
