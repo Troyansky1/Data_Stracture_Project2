@@ -63,7 +63,8 @@ public class Tests extends TestHelper {
         System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
 
     }
-
+    
+    // checking delete min
     public static void Test4() {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 13, 43, 23, 33, 63, 53, 73 }, false);

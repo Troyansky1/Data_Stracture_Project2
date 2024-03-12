@@ -94,9 +94,45 @@ public class BinomialHeap {
 		while (prev.next.item.key != node2.item.key) {
 			prev = prev.next;
 		}
-		;
 		return prev;
 	}
+	/**
+	 * 
+	 * updates the min Node and last node to be the one with the highest rank.
+	 *
+	 */
+	public void updateMin_last() {
+		HeapNode newmin=last;
+		HeapNode newlast=last;
+		HeapNode prev = last.next;
+		while (prev.item.key != last.item.key) {
+			if(prev.rank>newlast.rank)
+				newlast=prev;
+			if(prev.item.key<newmin.item.key)
+				newmin=prev;
+			prev = prev.next;			
+		}
+		this.min=newmin;
+		this.last=newlast;
+	}
+	
+	/**
+	 * 
+	 * calculates the size of node2.
+	 *
+	 */
+	public int calcSize(HeapNode node2) {
+		HeapNode prev = node2.next;
+		int size=(int) Math.pow(2, node2.rank);
+		while (prev.item.key != node2.item.key) {
+			size+=(int) Math.pow(2, prev.rank);
+			prev = prev.next;
+			
+		}
+		return size;
+	}
+	
+
 
 	/**
 	 * 
@@ -106,29 +142,54 @@ public class BinomialHeap {
 	public void deleteMin() {
 		// delete it then meld
 		size -= 1;
-		HeapNode minNext = this.min.next;
-		HeapNode minprev = findPrev(min);
 		HeapNode minChild = this.min.child;
+		HeapNode minNext = this.min.next;
+		if(minNext.item.key==min.item.key)
+		{
+			
+		}
+		
+		HeapNode minprev = findPrev(min);
 
 		minprev.next = minNext;
 		minChild.parent = null;
 
 		//int treenum = (int) (Math.log(minChild.rank) / Math.log(2)); // tree num is log2(rank)
 		int treenum = minChild.rank;		
-		int childrensize = (int) Math.pow(2, minChild.rank);
+		int childrensize = calcSize(minChild);
+		
+		
 		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
-		if (min.item.key == last.item.key) {
-			last = last.next;
+		if(min.item.key==last.item.key)
+		{ //check again
+			last=last.next;
 		}
-		this.min = minNext;
+		
+		heap2.updateMin_last();
+		
+		if(min.next==min) 
+		{
+			//means that the min doesnt have next.So we just update the min and last in the children
+			this.size=heap2.size;
+			this.num_trees=heap2.num_trees;
+			this.last=heap2.last;
+			this.min=heap2.min;
 
+			
+		}
+		else {
+			updateMin_last();
+			this.last.parent = null;
+			heap2.last.parent = null;
+			meld(heap2);
+		}
+		
 		System.out.println("*******HEAP2******");
 		heap2.printHeap();
 		System.out.println("*******THIS******");
 		this.printHeap();
-		this.last.parent = null;
-		heap2.last.parent = null;
-		meld(heap2);
+		//this.last.parent = null;
+		//heap2.last.parent = null;
 
 	}
 
