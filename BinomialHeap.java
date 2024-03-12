@@ -123,6 +123,8 @@ public class BinomialHeap {
 		heap2.printHeap();
 		System.out.println("*******THIS******");
 		this.printHeap();
+		this.last.parent=null;
+		heap2.last.parent=null;
 		meld(heap2);
 
 	}
@@ -181,19 +183,23 @@ public class BinomialHeap {
 	 * Decrease the key of item by diff and fix the heap.
 	 * 
 	 */
-	public void decreaseKey(HeapItem item, int diff) {
-		if (item.key == min.item.key) {
-			item.key = item.key - diff;
+	public void decreaseKey(HeapItem item2, int diff) {
+		if (item2.key == this.min.item.key) {
+			item2.key = item2.key - diff;
 			return;
 		}
-		item.key = item.key - diff;
+		item2.key = item2.key - diff;
 		// its not the root, so we check to heapify-up
-		HeapNode node = item.node;
-		HeapNode nodeparent = item.node.parent;
+		HeapNode node = item2.node;
+		HeapNode nodeparent = item2.node.parent;
+
+		System.out.println("item2.node= "+item2.node.item.key);
+		System.out.println("nodeparent isss= "+nodeparent.item.key);
 		int tmpkey;
 		String tmpInfo;
 
-		while (nodeparent != null && nodeparent.item.key >= node.item.key) {
+		while (nodeparent != null && nodeparent.item.key >= item2.key) {
+			System.out.println("In while :))))))))))))");
 			tmpkey = node.item.key;
 			tmpInfo = node.item.info;
 			node.item.key = nodeparent.item.key;
@@ -246,6 +252,10 @@ public class BinomialHeap {
 		HeapNode res = new HeapNode(null, null, null, null, 0);
 		HeapNode first = new HeapNode(null, null, null, null, 0);
 		HeapNode thisNode = new HeapNode(null, null, null, null, 0);
+		System.out.println("heap1_node= "+ heap1_node.item.key +"rank is= "+heap1_node.rank);
+		System.out.println("heap2_node= "+ heap2_node.item.key +"rank is= "+heap2_node.rank);
+
+		System.out.println("**");
 
 		int max_rank = Math.max(this.last.rank, heap2.last.rank);
 		int meld_rank = 1;
