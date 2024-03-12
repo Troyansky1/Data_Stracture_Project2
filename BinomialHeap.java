@@ -67,7 +67,7 @@ public class BinomialHeap {
 			}
 			x.child = y;
 			y.parent = x;
-			x.rank *= 2;
+			x.rank++;
 			return x;
 		} else {
 			if (y.child == null) {
@@ -78,7 +78,7 @@ public class BinomialHeap {
 			}
 			y.child = x;
 			x.parent = y;
-			y.rank *= 2;
+			y.rank++;
 			return y;
 		}
 
@@ -113,7 +113,8 @@ public class BinomialHeap {
 		minprev.next = minNext;
 		minChild.parent = null;
 
-		int treenum = (int) (Math.log(minChild.rank) / Math.log(2)); // tree num is log2(rank)
+		//int treenum = (int) (Math.log(minChild.rank) / Math.log(2)); // tree num is log2(rank)
+		int treenum = minChild.rank;		
 		int childrensize = (int) Math.pow(2, minChild.rank);
 		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
 		if (min.item.key == last.item.key) {
@@ -336,14 +337,14 @@ public class BinomialHeap {
 				last = thisNode;
 
 				thisNode.next = nextNode;
-				if (prev_node.rank < meld_rank){
+				if (prev_node.rank < meld_rank) {
 					prev_node.next = thisNode;
-				}				
+				}
 				// Advance the prev and next nodes in the current heap.
 				prev_node = thisNode;
 				heap1_node = nextNode;
 			}
-			meld_rank = meld_rank * 2;
+			meld_rank ++;
 		}
 		last.next = first;
 		return;
