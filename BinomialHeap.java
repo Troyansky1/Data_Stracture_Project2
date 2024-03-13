@@ -304,7 +304,7 @@ public class BinomialHeap {
 	public void meld(BinomialHeap heap2) {
 		num_trees = this.num_trees + heap2.num_trees;
 		// System.out.println("In meld");
-		HeapNode prev_node = this.last;
+		HeapNode prev_node = new HeapNode(null, null, null, null, -1);
 		HeapNode nextNode = this.last.next;
 		HeapNode heap1_node = this.last.next;
 		HeapNode heap2_node = heap2.last.next;

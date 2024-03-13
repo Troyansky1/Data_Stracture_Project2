@@ -1,13 +1,13 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-        //Test0();
-        //Test1();
-        //Test2();
-        //Test3();
+        // Test0();
+        // Test1();
+        // Test2();
+        Test3();
         // Test3_1();
-         //Test4();
-    	Test5();
-    	// Test6();
+        // Test4();
+        // Test5();
+        // Test6();
 
     }
 
@@ -16,6 +16,7 @@ public class Tests extends TestHelper {
         BinomialHeap heap = new BinomialHeap();
         insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6 }, false);
         insertKeyArray(heap, new int[] { 7, 8, 9, 10 }, false);
+        heap.printHeap();
     }
 
     // Checking more basic insertions.
@@ -27,7 +28,7 @@ public class Tests extends TestHelper {
         // Should be 1-> 3
         BinomialHeap heap2 = new BinomialHeap();
         insertKeyArray(heap2, new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }, false);
-        // heap2.printHeap();
+        heap2.printHeap();
 
     }
 
@@ -35,7 +36,9 @@ public class Tests extends TestHelper {
     public static void Test2() {
         // Should be 1-> 2
         BinomialHeap heap3 = new BinomialHeap();
-        insertKeyArray(heap3, new int[] { 7, 8, 4, 5, 6, 3, 2, 9, 1, 10 }, false);
+        insertKeyArray(heap3, new int[] { 7, 8, 4, 5, 6 }, false);
+        heap3.printHeap();
+        insertKeyArray(heap3, new int[] { 3, 2, 9, 1, 10 }, false);
         heap3.printHeap();
     }
 
@@ -85,7 +88,6 @@ public class Tests extends TestHelper {
         System.out.println("min: " + heap.findMin().key + " Rank " + heap.findMin().node.rank);
         heap.printHeap();
     }
-    
 
     // Checking random insertation to find edge cases of delete min
     public static void Test5() {
