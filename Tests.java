@@ -1,12 +1,13 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-        Test0();
-        Test1();
-        Test2();
-        Test3();
+        //Test0();
+        //Test1();
+        //Test2();
+        //Test3();
         // Test3_1();
-        // Test4();
-        // Test6();
+         //Test4();
+    	Test5();
+    	// Test6();
 
     }
 
@@ -35,6 +36,7 @@ public class Tests extends TestHelper {
         // Should be 1-> 2
         BinomialHeap heap3 = new BinomialHeap();
         insertKeyArray(heap3, new int[] { 7, 8, 4, 5, 6, 3, 2, 9, 1, 10 }, false);
+        heap3.printHeap();
     }
 
     // Checking basic meld
@@ -83,20 +85,19 @@ public class Tests extends TestHelper {
         System.out.println("min: " + heap.findMin().key + " Rank " + heap.findMin().node.rank);
         heap.printHeap();
     }
+    
 
+    // Checking random insertation to find edge cases of delete min
     public static void Test5() {
         BinomialHeap heap = new BinomialHeap();
-        BinomialHeap heap2 = new BinomialHeap();
-        // insertKeyArray(heap, new int[] {13, 43, 23, 33, 63, 53, 73});
-        insertKeyArray(heap, new int[] { 23, 33, 43 }, false);
-        insertKeyArray(heap2, new int[] { 63, 53, 73 }, false);
-        heap.meld(heap2);
+        insertKeyArray(heap, new int[] { 7, 8, 4, 5, 6, 3, 2, 9, 1, 10 }, false);
+        System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
+        System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
+        System.out.println("min: " + heap.findMin().key + " Rank " + heap.findMin().node.rank);
         heap.printHeap();
-
-        System.out.println("*************");
-        // heap.deleteMin();
-        // heap.printHeap();
-
+        heap.deleteMin();
+        System.out.println("min: " + heap.findMin().key + " Rank " + heap.findMin().node.rank);
+        heap.printHeap();
     }
 
     // testing decreaseKey
