@@ -179,10 +179,10 @@ public class BinomialHeap {
 			meld(heap2);
 		}
 
-		System.out.println("*******HEAP2******");
-		heap2.printHeap();
-		System.out.println("*******THIS******");
-		this.printHeap();
+		// System.out.println("*******HEAP2******");
+		// heap2.printHeap();
+		// System.out.println("*******THIS******");
+		// this.printHeap();
 		// this.last.parent = null;
 		// heap2.last.parent = null;
 
@@ -252,13 +252,13 @@ public class BinomialHeap {
 		HeapNode node = item2.node;
 		HeapNode nodeparent = item2.node.parent;
 
-		System.out.println("item2.node= " + item2.node.item.key);
-		System.out.println("nodeparent isss= " + nodeparent.item.key);
+		// System.out.println("item2.node= " + item2.node.item.key);
+		// System.out.println("nodeparent isss= " + nodeparent.item.key);
 		int tmpkey;
 		String tmpInfo;
 
 		while (nodeparent != null && nodeparent.item.key >= item2.key) {
-			System.out.println("In while :))))))))))))");
+			// System.out.println("In while :))))))))))))");
 			tmpkey = node.item.key;
 			tmpInfo = node.item.info;
 			node.item.key = nodeparent.item.key;
