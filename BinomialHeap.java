@@ -108,12 +108,12 @@ public class BinomialHeap {
 		this.min = newmin;
 		this.last = newlast;
 	}
+	
 
 	/**
 	 * 
 	 * calculates the size of node2.
 	 *
-	 */
 	public int calcSize(HeapNode node2) {
 		HeapNode prev = node2.next;
 		int size = (int) Math.pow(2, node2.rank);
@@ -124,6 +124,10 @@ public class BinomialHeap {
 		}
 		return size;
 	}
+	*/
+	
+	
+	
 
 	/**
 	 * 
@@ -132,33 +136,44 @@ public class BinomialHeap {
 	 */
 	public void deleteMin() {
 		// delete it then meld
+		
 		size -= 1;
 		HeapNode minChild = this.min.child;
 		HeapNode minNext = this.min.next;
-		if (minNext.item.key == min.item.key) {
-
-		}
-
 		HeapNode minprev = findPrev(min);
+		if(minChild==null) {
+			if(minNext==min) {
+				//it was just the min
+				this.size = 0;
+				this.num_trees = 0;
+				this.last = null;
+				this.min = null;
+				return;
+			}
+			minprev.next = minNext;
+			this.num_trees-=1;
+			updateMin_last();
+			return;
+		}
 
 		minprev.next = minNext;
 		minChild.parent = null;
+		
 
-		// int treenum = (int) (Math.log(minChild.rank) / Math.log(2)); // tree num is
-		// log2(rank)
-		int treenum = minChild.rank;
-		int childrensize = calcSize(minChild);
+		
+		int treenum = min.rank;     
+		//int childrensize = calcSize(minChild);     
+		int childrensize = (int)Math.pow(2,min.rank)-1;
 
 		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
-		if (min.item.key == last.item.key) { // check again
+		if (min.item.key == last.item.key) { 
 			last = last.next;
 		}
 
 		heap2.updateMin_last();
 
 		if (min.next == min) {
-			// means that the min doesnt have next.So we just update the min and last in the
-			// children
+			// means that the min doesnt have next.
 			this.size = heap2.size;
 			this.num_trees = heap2.num_trees;
 			this.last = heap2.last;
@@ -171,7 +186,7 @@ public class BinomialHeap {
 			meld(heap2);
 		}
 
-		// System.out.println("*******HEAP2******");
+		 //System.out.println("*******HEAP2******");
 		// heap2.printHeap();
 		// System.out.println("*******THIS******");
 		// this.printHeap();
@@ -249,7 +264,7 @@ public class BinomialHeap {
 		int tmpkey;
 		String tmpInfo;
 
-		while (nodeparent != null && nodeparent.item.key >= item2.key) {
+		while (nodeparent != null && nodeparent.item.key >= node.item.key) {
 			// System.out.println("In while :))))))))))))");
 			tmpkey = node.item.key;
 			tmpInfo = node.item.info;

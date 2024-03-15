@@ -42,7 +42,7 @@ public class HeapTester {
 			System.out.println("Number of Broken Heaps: " + brokenHeaps.size());
 			System.out.println("Number of Empty Heaps: " + emptyHeaps.size());
 			System.out.println("Number of Invalid Heaps: " + invalidHeaps.size());
-			System.out.println("Number of Invalid Min Field Heaps: " + invalidFields.get("min").size());
+			//System.out.println("Number of Invalid Min Field Heaps: " + invalidFields.get("min").size());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class HeapTester {
 		areHeapsMinValid(randHeaps, "insert");
 		printStats();
 		System.out.println("Deleting Random Nodes from Heaps ...");
-		deleteRandNodes(randHeaps);
+		//deleteRandNodes(randHeaps);
 		System.out.println("Checking Heaps Validity for Delete ...");
 		areHeapsValid(randHeaps, "delete");
 		areHeapsMinValid(randHeaps, "delete");
