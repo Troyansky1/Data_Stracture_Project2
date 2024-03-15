@@ -225,7 +225,8 @@ public class HeapTester {
 					min = item;
 				}
 			}
-			return heap.min == min.node;
+			// Edited this so it checks values and not speciphic nodes.
+			return heap.min.item.key == min.node.item.key;
 		}
 
 	}
