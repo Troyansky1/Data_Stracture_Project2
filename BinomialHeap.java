@@ -59,28 +59,20 @@ public class BinomialHeap {
 	 */
 	public BinomialHeap.HeapNode link(HeapNode x, HeapNode y) {
 		if (x.item.key <= y.item.key) {
-			if (x.child == null) {
-				y.next = y;
-			} else {
-				y.next = x.child.next;
-				x.child.next = y;
-			}
-			x.child = y;
-			y.parent = x;
-			x.rank++;
-			return x;
-		} else {
-			if (y.child == null) {
-				x.next = x;
-			} else {
-				x.next = y.child.next;
-				y.child.next = x;
-			}
-			y.child = x;
-			x.parent = y;
-			y.rank++;
-			return y;
+			HeapNode tmp = x;
+			x = y;
+			y = tmp;
 		}
+		if (y.child == null) {
+			x.next = x;
+		} else {
+			x.next = y.child.next;
+			y.child.next = x;
+		}
+		y.child = x;
+		x.parent = y;
+		y.rank++;
+		return y;
 
 	}
 
@@ -365,6 +357,7 @@ public class BinomialHeap {
 				else if (heap1_node.rank == meld_rank && heap2_node.rank == meld_rank) {
 					nextNode = getNext(heap1_node);
 					HeapNode next2 = getNext(heap2_node);
+					// Check if there is a residue and make it the current node.
 					if (res.rank == meld_rank) {
 						thisNode = res;
 						res = link(heap1_node, heap2_node);
@@ -381,23 +374,24 @@ public class BinomialHeap {
 			// If there is a node in this rank of the tree, connect it to the previos node
 			// and the next node.
 			if (thisNode.rank == meld_rank) {
-				// If this is the first, save the pointer.
+				// If this is the first, save the pointer. If not, make this the next of the
+				// previous.
 				if (first.rank == -1) {
 					first = thisNode;
+				} else {
+					prev_node.next = thisNode;
 				}
+
+				// Advance the prev and next nodes in the current heap.
+				prev_node = thisNode;
+
 				// Check if minimal node, update if it is.
 				if (min.item.key > thisNode.item.key) {
 					min = thisNode;
 				}
 				// Update last
 				last = thisNode;
-
-				thisNode.next = nextNode;
-				if (prev_node.rank < meld_rank) {
-					prev_node.next = thisNode;
-				}
-				// Advance the prev and next nodes in the current heap.
-				prev_node = thisNode;
+				// Advance the pointer in heap1.
 				heap1_node = nextNode;
 			}
 			meld_rank++;
