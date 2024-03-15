@@ -1,9 +1,9 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-        // Test0();
-        // Test1();
-        // Test2();
-        // Test3();
+        Test0();
+        Test1();
+        Test2();
+        Test3();
         // Test3_1();
         // Test4();
         // Test5();
@@ -48,11 +48,9 @@ public class Tests extends TestHelper {
         insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, false);
         BinomialHeap heap2 = new BinomialHeap();
         heap.printHeap();
-        insertKeyArray(heap2, new int[] { 30, 29, 28, 27, 26, 25, 24, 23, 22, 21 }, true);
+        insertKeyArray(heap2, new int[] { 30, 29, 28, 27, 26, 25, 24, 23, 22, 21 }, false);
         heap2.printHeap();
         heap.meld(heap2);
-        System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
-        System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
 
     }
 
@@ -64,8 +62,6 @@ public class Tests extends TestHelper {
         insertKeyArray(heap2, new int[] { 23, 33, 43 }, false);
         heap.meld(heap2);
         heap.printHeap();
-        System.out.println("First: " + heap.last.next.item.key + " Rank " + heap.last.next.rank);
-        System.out.println("Last: " + heap.last.item.key + " Rank " + heap.last.rank);
 
     }
 
