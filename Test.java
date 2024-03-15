@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Test {
 	public static Random rand = new Random();
-	public static int nHeaps = 1000;
+	public static int nHeaps = 100;
 	public static int maxHeapSize = rand.nextInt(nHeaps);
 
 	public static void main(String[] args) {
