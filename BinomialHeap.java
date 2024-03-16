@@ -47,14 +47,10 @@ public class BinomialHeap {
 			meld(heap);
 		}
 		size++;
-		
-		return heap_item;
-		
-	}
-	
 
-	
-	
+		return heap_item;
+
+	}
 
 	/**
 	 * 
@@ -116,9 +112,6 @@ public class BinomialHeap {
 		this.min = newmin;
 		this.last = newlast;
 	}
-	
-
-	
 
 	/**
 	 * 
@@ -130,9 +123,9 @@ public class BinomialHeap {
 		HeapNode minChild = this.min.child;
 		HeapNode minNext = this.min.next;
 		HeapNode minprev = findPrev(min);
-		if(minChild==null) {
-			if(minNext==min) {
-				//it was just the min
+		if (minChild == null) {
+			if (minNext == min) {
+				// it was just the min
 				this.size = 0;
 				this.num_trees = 0;
 				this.last = null;
@@ -140,22 +133,20 @@ public class BinomialHeap {
 				return;
 			}
 			minprev.next = minNext;
-			this.num_trees-=1;
-			size-=1;
+			this.num_trees -= 1;
+			size -= 1;
 			updateMin_last();
 			return;
 		}
 
 		minprev.next = minNext;
 		minChild.parent = null;
-		
 
-		
-		int treenum = min.rank;          
-		int childrensize = (int)Math.pow(2,min.rank)-1;
+		int treenum = min.rank;
+		int childrensize = (int) Math.pow(2, min.rank) - 1;
 
 		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
-		if (min.item.key == last.item.key) { 
+		if (min.item.key == last.item.key) {
 			last = last.next;
 		}
 
@@ -172,11 +163,9 @@ public class BinomialHeap {
 			updateMin_last();
 			this.last.parent = null;
 			heap2.last.parent = null;
-			size-=1;
+			size -= 1;
 			meld(heap2);
 		}
-
-
 
 	}
 
@@ -224,7 +213,7 @@ public class BinomialHeap {
 	 *
 	 */
 	public HeapItem findMin() {
-		if(min==null)
+		if (min == null)
 			return null;
 		return min.item;
 	}
@@ -260,9 +249,9 @@ public class BinomialHeap {
 			nodeparent = nodeparent.parent;
 
 		}
-		if(min.item.key>=node.item.key)
-			min=node;
-		
+		if (min.item.key >= node.item.key)
+			min = node;
+
 	}
 
 	/**
@@ -271,7 +260,7 @@ public class BinomialHeap {
 	 *
 	 */
 	public void delete(HeapItem item) {
-		int diff = (int)Double.POSITIVE_INFINITY;
+		int diff = (int) Double.POSITIVE_INFINITY;
 		decreaseKey(item, diff); // making item the min node
 		deleteMin(); // delete the min- which is item.
 	}
@@ -292,22 +281,19 @@ public class BinomialHeap {
 	 *
 	 */
 	public void meld(BinomialHeap heap2) {
-		if(this.last==null )
-		{ 
-			//added this for the test 
+		if (this.last == null) {
+			// added this for the test
 			this.size = heap2.size;
 			this.num_trees = heap2.num_trees;
 			this.last = heap2.last;
-			this.min = heap2.min;			
+			this.min = heap2.min;
 			return;
 		}
-		if(heap2.last==null)
+		if (heap2.last == null)
 			return;
-		
-		
-		
-		num_trees=0;
-		//System.out.println("In meld");
+
+		num_trees = 0;
+		// System.out.println("In meld");
 		HeapNode prev_node = new HeapNode(null, null, null, null, -1);
 		HeapNode nextNode = this.last.next;
 		HeapNode heap1_node = this.last.next;
