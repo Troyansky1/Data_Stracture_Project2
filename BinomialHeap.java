@@ -368,7 +368,9 @@ public class BinomialHeap {
 				else if (heap1_node.rank != meld_rank && heap2_node.rank == meld_rank) {
 					// Check if there is a residue and link with heap2 node
 					if (res.rank == meld_rank) {
+						HeapNode next2 = getNext(heap2_node);
 						res = link(res, heap2_node);
+						heap2_node = next2;
 					}
 					// Advance the pointer in heap2
 					else {
