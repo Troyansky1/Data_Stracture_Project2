@@ -132,6 +132,8 @@ public class BinomialHeap {
 	 */
 	public void deleteMin() {
 		// delete it then meld
+		if(empty())
+			return;
 		HeapNode minChild = this.min.child;
 		HeapNode minNext = this.min.next;
 		HeapNode minprev = findPrev(min);
