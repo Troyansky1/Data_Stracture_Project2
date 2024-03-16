@@ -13,8 +13,8 @@ public class BinomialHeap {
 		this.num_trees = num_trees;
 		this.last = last;
 		this.min = min;
-		this.num_of_links=0;
-		
+		this.num_of_links = 0;
+
 	}
 
 	public BinomialHeap() {
@@ -23,7 +23,7 @@ public class BinomialHeap {
 		this.num_trees = 0;
 		this.min = null;
 		this.last = null;
-		this.num_of_links=0;
+		this.num_of_links = 0;
 	}
 
 	public int size;
@@ -45,6 +45,7 @@ public class BinomialHeap {
 			num_trees = 1;
 			last = heap_item.node;
 			min = heap_item.node;
+			size = 1;
 		} else {
 			BinomialHeap heap = new BinomialHeap(1, 1, heap_item.node, heap_item.node);
 
@@ -67,6 +68,9 @@ public class BinomialHeap {
 	 */
 	public BinomialHeap.HeapNode link(HeapNode x, HeapNode y) {
 		this.num_of_links++;
+		if (x.item == null || y.item == null) {
+			System.out.println("null item");
+		}
 		if (x.item.key <= y.item.key) {
 			HeapNode tmp = x;
 			x = y;
@@ -166,7 +170,7 @@ public class BinomialHeap {
 			this.min = heap2.min;
 
 		} else {
-			//min has chidren and Next
+			// min has chidren and Next
 			updateMin_last();
 			this.last.parent = null;
 			heap2.last.parent = null;
@@ -275,20 +279,20 @@ public class BinomialHeap {
 	private HeapNode getNext(HeapNode node) {
 		HeapNode nextNode = new HeapNode(null, null, null, null, -1);
 		int this_rank = node.rank;
-		//System.out.println("in GetNext ");
-		//if(node.next==null)
-		//	System.out.println("error here :node.next==null");
-		//int next_rank = node.next.rank;
-	//	if (node.next != null && next_rank > this_rank) {
-		//	nextNode = node.next;
-		//}
+		// System.out.println("in GetNext ");
+		// if(node.next==null)
+		// System.out.println("error here :node.next==null");
+		// int next_rank = node.next.rank;
+		// if (node.next != null && next_rank > this_rank) {
+		// nextNode = node.next;
+		// }
 		if (node.next != null) {
 			int next_rank = node.next.rank;
 			if (next_rank > this_rank) {
 				nextNode = node.next;
 			}
 		}
-		
+
 		return nextNode;
 	}
 
@@ -344,7 +348,7 @@ public class BinomialHeap {
 				// if there is an item in heap1 but no item is Heap2
 				if (heap1_node.rank == meld_rank && heap2_node.rank != meld_rank) {
 
-				///////		System.out.println("in here 1 ");
+					/////// System.out.println("in here 1 ");
 					nextNode = getNext(heap1_node);
 					// Check if there is a residue and link with heap 1 node
 					if (res.rank == meld_rank) {
@@ -367,17 +371,17 @@ public class BinomialHeap {
 					else {
 						thisNode = heap2_node;
 
-					///////	System.out.println("in here 2");
+						/////// System.out.println("in here 2");
 						heap2_node = getNext(heap2_node);
 					}
 				}
 
 				// else if there are items in both heaps
 				else if (heap1_node.rank == meld_rank && heap2_node.rank == meld_rank) {
-				///////	System.out.println("in here 3");
+					/////// System.out.println("in here 3");
 					nextNode = getNext(heap1_node);
 
-				///////	System.out.println("in here 4 ");
+					/////// System.out.println("in here 4 ");
 					HeapNode next2 = getNext(heap2_node);
 					// Check if there is a residue and make it the current node.
 					if (res.rank == meld_rank) {
