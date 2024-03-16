@@ -1,0 +1,66 @@
+(heap 2) The heap has 5 nodes but has a size property of 3
+
+Performed steps:
+Initialize 14
+Insert 5 2381 4e5611dc
+Insert 1 1927 afe15fc9
+DecreaseKey 1 afe15fc9 477
+Delete 1 afe15fc9
+Insert 6 2596 9e793874
+DecreaseKey 6 9e793874 1515
+DecreaseKey 5 4e5611dc 471
+DeleteMin 5
+Insert 9 2817 126cdbd6
+DeleteMin 6
+Delete 9 126cdbd6
+Insert 5 2310 0cc59f25
+Delete 5 0cc59f25
+Insert 0 1254 81d23a54
+Delete 0 81d23a54
+Insert 7 1475 c0fd2a5e
+Delete 7 c0fd2a5e
+Insert 12 1497 34c1db11
+Delete 12 34c1db11
+Meld 1 8
+Insert 10 1324 ec6f02f9
+Delete 10 ec6f02f9
+Insert 2 1366 c3f7df8c
+DecreaseKey 2 c3f7df8c 365
+Insert 12 526 e328a7ff
+Insert 12 3341 584034e2
+Insert 9 2757 2b7e04da
+Insert 6 2907 19310d6e
+Insert 3 1065 81142f3e
+DecreaseKey 6 19310d6e 2366
+Meld 9 0
+Insert 10 1575 6a761d00
+DeleteMin 10
+DeleteMin 2
+DecreaseKey 1 c3f7df8c 380
+DecreaseKey 8 2b7e04da 2667
+Delete 11 e328a7ff
+Delete 1 c3f7df8c
+Insert 3 2888 791a581d
+DeleteMin 5
+Insert 5 2475 b80a7e84
+Meld 5 9
+Delete 5 b80a7e84
+Insert 3 2102 a35c104d
+DecreaseKey 3 791a581d 1442
+DeleteMin 8
+Meld 3 2
+Insert 8 1055 f83bf87d
+DecreaseKey 8 f83bf87d 583
+DecreaseKey 2 a35c104d 1419
+Insert 9 1831 a2fe9057
+DecreaseKey 2 791a581d 916
+DecreaseKey 2 791a581d 215
+Insert 2 759 f1ca207d
+Insert 5 1415 acf542f3
+DeleteMin 5
+Meld 0 5
+Insert 7 1352 c891ae53
+DecreaseKey 2 a35c104d 303
+DecreaseKey 8 584034e2 1870
+Insert 0 1004 2ff0aa29
+Meld 2 7
