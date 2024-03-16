@@ -45,7 +45,7 @@ public class BinomialHeap {
 			num_trees = 1;
 			last = heap_item.node;
 			min = heap_item.node;
-			size = 1;
+			size = 0;
 		} else {
 			BinomialHeap heap = new BinomialHeap(1, 1, heap_item.node, heap_item.node);
 
@@ -68,8 +68,11 @@ public class BinomialHeap {
 	 */
 	public BinomialHeap.HeapNode link(HeapNode x, HeapNode y) {
 		this.num_of_links++;
-		if (x.item == null || y.item == null) {
-			System.out.println("null item");
+		if (x.item == null) {
+			System.out.println("null x" + x.rank + y.rank);
+		}
+		if (y.item == null) {
+			System.out.println("null y");
 		}
 		if (x.item.key <= y.item.key) {
 			HeapNode tmp = x;
@@ -420,6 +423,7 @@ public class BinomialHeap {
 				last = thisNode;
 				// Advance the pointer in heap1.
 				heap1_node = nextNode;
+
 			}
 			meld_rank++;
 		}

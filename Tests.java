@@ -1,13 +1,13 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-        Test0();
-        Test1();
-        Test2();
-        Test3();
+        // Test0();
+        // Test1();
+        // Test3();
         // Test3_1();
         // Test4();
         // Test5();
         // Test6();
+        Test7();
 
     }
 
@@ -116,6 +116,16 @@ public class Tests extends TestHelper {
         heap.decreaseKey(heap.min.child.child.item, 23);
         System.out.println("new min is=" + heap.findMin().key);
         System.out.println("*****");
+        heap.printHeap();
+
+    }
+
+    // Checking random insertation to find edge cases of delete min
+    public static void Test7() {
+        BinomialHeap heap = new BinomialHeap();
+        insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, false);
+        heap.printHeap();
+        heap.deleteMin();
         heap.printHeap();
 
     }
