@@ -299,6 +299,35 @@ public class BinomialHeap {
 		return nextNode;
 	}
 
+	private int getNextRank(int rank, HeapNode node1, HeapNode node2, HeapNode res) {
+		// If there is a residue advance the rank by 1 (res cannot be bigger anyway);
+		if (res.rank == rank + 1) {
+			return res.rank;
+		} else {
+			// Find the minimum between the nodes pointers.
+			int min = Math.min(node1.rank, node2.rank);
+			// If the min is smaller than the current rank, advance to the other node's
+			// rank.
+			if (min <= rank) {
+				int max = Math.max(node1.rank, node2.rank);
+				// Check if this is the end of the meld.
+				if (max <= rank) {
+					return rank + 1;
+				}
+				// Return the next minimal rank (the max of the two).
+				else {
+					return max;
+				}
+
+			}
+			// else, advance to the next minimal node.
+			else {
+				return min;
+			}
+
+		}
+	}
+
 	/**
 	 * 
 	 * Meld the heap with heap2
@@ -333,7 +362,7 @@ public class BinomialHeap {
 		// System.out.println("**");
 
 		int max_rank = Math.max(this.last.rank, heap2.last.rank);
-		int meld_rank = 0;
+		int meld_rank = Math.min(heap1_node.rank, heap2_node.rank);
 		// Iterate over the heaps to meld as long as it's not the maximum rank or when
 		// it is and there is a residue to meld.
 		while (max_rank >= meld_rank || res.rank == meld_rank) {
@@ -427,7 +456,9 @@ public class BinomialHeap {
 				heap1_node = nextNode;
 
 			}
-			meld_rank++;
+
+			meld_rank = getNextRank(meld_rank, heap1_node, heap2_node, res);
+			// meld_rank++;
 		}
 		last.next = first;
 		return;

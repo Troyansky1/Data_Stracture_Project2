@@ -1,8 +1,8 @@
 public class Tests extends TestHelper {
     public static void main(String[] args) {
-        // Test0();
-        // Test1();
-        // Test3();
+        Test0();
+        Test1();
+        Test3();
         // Test3_1();
         // Test4();
         // Test5();
@@ -14,7 +14,8 @@ public class Tests extends TestHelper {
     // Testing very baic insertion. Sanity check.
     public static void Test0() {
         BinomialHeap heap = new BinomialHeap();
-        insertKeyArray(heap, new int[] { 1, 2, 3, 4, 5, 6 }, false);
+        insertKeyArray(heap, new int[] { 1, 2 }, false);
+        heap.printHeap();
         insertKeyArray(heap, new int[] { 7, 8, 9, 10 }, false);
         heap.printHeap();
     }
