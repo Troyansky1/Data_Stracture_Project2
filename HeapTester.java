@@ -68,7 +68,7 @@ public class HeapTester {
 		areHeapsMinValid(randHeaps, "insert");
 		printStats();
 		System.out.println("Deleting Random Nodes from Heaps ...");
-		//deleteRandNodes(randHeaps);
+		deleteRandNodes(randHeaps);
 		System.out.println("Checking Heaps Validity for Delete ...");
 		areHeapsValid(randHeaps, "delete");
 		areHeapsMinValid(randHeaps, "delete");
