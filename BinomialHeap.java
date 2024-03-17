@@ -64,7 +64,7 @@ public class BinomialHeap {
 	 *
 	 */
 	public BinomialHeap.HeapNode link(HeapNode x, HeapNode y) {
-		
+
 		if (x.item.key <= y.item.key) {
 			HeapNode tmp = x;
 			x = y;
@@ -99,7 +99,7 @@ public class BinomialHeap {
 	/**
 	 * 
 	 * help function for delete min
-	 * updates the min Node and last node to be the one with the highest rank. 
+	 * updates the min Node and last node to be the one with the highest rank.
 	 *
 	 */
 	public void updateMin_last() {
@@ -107,9 +107,9 @@ public class BinomialHeap {
 		HeapNode newlast = last;
 		HeapNode prev = last.next;
 		while (prev.item.key != last.item.key) {
-			//checking all the roots
+			// checking all the roots
 			if (prev.rank > newlast.rank)
-				//last is the node with the highest rank
+				// last is the node with the highest rank
 				newlast = prev;
 			if (prev.item.key < newmin.item.key)
 				newmin = prev;
@@ -126,13 +126,13 @@ public class BinomialHeap {
 	 */
 	public void deleteMin() {
 		// delete the minimal item then meld the children of min into the original heap.
-		if(empty())
+		if (empty())
 			return;
 		HeapNode minChild = this.min.child;
 		HeapNode minNext = this.min.next;
 		HeapNode minprev = findPrev(min);
 		if (minChild == null) {
-			//no need to meld
+			// no need to meld
 			if (minNext == min) {
 				// min has No chidren,No Next --it was just the min
 				this.size = 0;
@@ -141,7 +141,8 @@ public class BinomialHeap {
 				this.min = null;
 				return;
 			}
-			// min has No chidren,has Next-- we delete the min and update min,last in the heap.
+			// min has No chidren,has Next-- we delete the min and update min,last in the
+			// heap.
 			minprev.next = minNext;
 			this.num_trees -= 1;
 			size -= 1;
@@ -154,11 +155,11 @@ public class BinomialHeap {
 
 		int treenum = min.rank;
 		int childrensize = (int) Math.pow(2, min.rank) - 1;
-		
-		//the children of min form a heap.
+
+		// the children of min form a heap.
 		BinomialHeap heap2 = new BinomialHeap(childrensize, treenum, minChild, minChild);
 		if (min.item.key == last.item.key) {
-			//if min was the last, we assign another last and update it later.
+			// if min was the last, we assign another last and update it later.
 			last = last.next;
 		}
 
@@ -181,8 +182,6 @@ public class BinomialHeap {
 		}
 
 	}
-	
-
 
 	/**
 	 * 
@@ -205,7 +204,7 @@ public class BinomialHeap {
 	public void decreaseKey(HeapItem item2, int diff) {
 		item2.key = item2.key - diff;
 		if (item2.key == this.min.item.key) {
-			//if it is the min ,no need to change the heap
+			// if it is the min ,no need to change the heap
 			return;
 		}
 		// its not the root, so we check to heapify-up
@@ -216,7 +215,7 @@ public class BinomialHeap {
 		String tmpInfo;
 
 		while (nodeparent != null && nodeparent.item.key >= node.item.key) {
-			//change the values node and its parent
+			// change the values node and its parent
 			tmpkey = node.item.key;
 			tmpInfo = node.item.info;
 			node.item.key = nodeparent.item.key;
@@ -228,7 +227,8 @@ public class BinomialHeap {
 
 		}
 		if (min.item.key >= node.item.key)
-			//in case the min was not a parent of node. if the node now is of minimal key,update min. 
+			// in case the min was not a parent of node. if the node now is of minimal
+			// key,update min.
 			min = node;
 
 	}
@@ -244,6 +244,13 @@ public class BinomialHeap {
 		deleteMin(); // delete the min-- which is item.
 	}
 
+	/**
+	 * 
+	 * Returns the next node of a given node.
+	 * If the next node is the same node or any smaller rank node, it returns a
+	 * virtual node (with null fields).
+	 *
+	 */
 	private HeapNode getNext(HeapNode node) {
 		HeapNode nextNode = new HeapNode(null, null, null, null, -1);
 		int this_rank = node.rank;
@@ -257,6 +264,13 @@ public class BinomialHeap {
 		return nextNode;
 	}
 
+	/**
+	 * 
+	 * Returns the rank of the next node (from heap1, heap 2 or the residue)
+	 * If there is no next node with a bigger rank, it returns the next rank (rank
+	 * ++)
+	 *
+	 */
 	private int getNextRank(int rank, HeapNode node1, HeapNode node2, HeapNode res) {
 		// If there is a residue advance the rank by 1 (res cannot be bigger anyway);
 		if (res.rank == rank + 1) {
@@ -298,7 +312,7 @@ public class BinomialHeap {
 			this.last = heap2.last;
 			this.min = heap2.min;
 			return;
-		}
+
 		if (heap2.last == null)
 			return;
 
@@ -405,6 +419,7 @@ public class BinomialHeap {
 			// meld_rank++;
 		}
 		last.next = first;
+		
 		return;
 	}
 
