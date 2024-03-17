@@ -312,6 +312,7 @@ public class BinomialHeap {
 			this.last = heap2.last;
 			this.min = heap2.min;
 			return;
+		}
 
 		if (heap2.last == null)
 			return;
@@ -497,3 +498,4 @@ public class BinomialHeap {
 	}
 
 }
+
