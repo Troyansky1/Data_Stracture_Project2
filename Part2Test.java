@@ -9,8 +9,7 @@ public class Part2Test {
 		 int runs=10;
 		 for(int i=1;i<=6;i++)
 		 {
-			// int n=Get_n(i);
-			 int n=20;
+			 int n=Get_n(i);
 			 System.out.println("************");
 			 System.out.println("now running for i= "+i+" n is= "+n );
 			 double [] rank_diff_links_trees1=new double [4];
@@ -44,17 +43,18 @@ public class Part2Test {
 				 rank_diff_links_trees3[index]=rank_diff_links_trees3[index]/runs;
 			 
 			 }	 
-		/*	 System.out.println("for heap 1: ");
+			 
+			 System.out.println("for heap 1: ");
 			 System.out.println("time is "+rank_diff_links_trees1[1]+"  num of links= "+rank_diff_links_trees1[2]+"  num of trees= "+rank_diff_links_trees1[3]+" rank ="+rank_diff_links_trees1[0]);
 			 System.out.println("");
-			*/ 
+			
 			 System.out.println("for heap 2: ");
 			 System.out.println("time is "+rank_diff_links_trees2[1]+"  num of links= "+rank_diff_links_trees2[2]+"  num of trees= "+rank_diff_links_trees2[3]+" rank ="+rank_diff_links_trees2[0]);
 			 System.out.println("");
-			/* System.out.println("for heap 3: ");
+			 System.out.println("for heap 3: ");
 			 System.out.println("time is "+rank_diff_links_trees3[1]+"  num of links= "+rank_diff_links_trees3[2]+"  num of trees= "+rank_diff_links_trees3[3]+" rank ="+rank_diff_links_trees3[0]);
 			 System.out.println("");
-			 */
+			 
 		 } 
 		  
 	 }
@@ -134,7 +134,6 @@ public class Part2Test {
 	     {
 			 heap2.insert(arr[k],String.valueOf(arr[k]));
 	     }	 
-		 
 	 }
 	 
 	 
