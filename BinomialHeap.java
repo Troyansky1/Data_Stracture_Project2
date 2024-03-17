@@ -184,6 +184,8 @@ public class BinomialHeap {
 		}
 
 	}
+	
+	
 
 	public void printHeap() {
 		if (empty()) {
